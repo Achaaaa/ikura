@@ -26,7 +26,7 @@ public class CylinderController : MonoBehaviour
 
     void Start()
     {
-        playableDirector = GetComponent<PlayableDirector>();
+        playableDirector = this.GetComponent<PlayableDirector>();
         RootOriginPos = this.transform.position;
         FigureRandomOffset = (2 * Mathf.PI / Figure_num ) * Random.Range(1, Figure_num);
         InstantiateFigures();
