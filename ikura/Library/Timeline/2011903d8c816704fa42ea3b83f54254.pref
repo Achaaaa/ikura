@@ -16,7 +16,7 @@ MonoBehaviour:
   trackScale: 1
   playRangeEnabled: 0
   timeAreaPlayRange: {x: 3.4028235e+38, y: 3.4028235e+38}
-  windowTime: 0.3
+  windowTime: 0
   verticalScroll: 0
   sequencerHeaderWidth: 315
   m_Keys:
@@ -60,7 +60,7 @@ MonoBehaviour:
       height: 1
     trackHeightExtension: 0
     m_MarkerTimeStampsKeys: 2a6cffffe657000098edffff
-    m_MarkerTimeStampsValues: 558a766dc1e6db08967ccf9e16e8db082469e19916e8db08
+    m_MarkerTimeStampsValues: 558a766dc1e6db0840473b7b45e8db082469e19916e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 6060ffffe4570000
-    m_MarkerTimeStampsValues: 558a766dc1e6db084250ac7416e8db08
+    m_MarkerTimeStampsKeys: 6060ffffe4570000d4ebffff
+    m_MarkerTimeStampsValues: 558a766dc1e6db084250ac7416e8db081a543b7b45e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 745effff282affffe8570000
-    m_MarkerTimeStampsValues: 558a766dc1e6db08ab2cad1fbde6db08dc41dc7d15e8db08
+    m_MarkerTimeStampsKeys: 745effff282affffe85700009eebffff
+    m_MarkerTimeStampsValues: 558a766dc1e6db08ab2cad1fbde6db08dc41dc7d15e8db08d8543b7b45e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -168,4 +168,4 @@ MonoBehaviour:
       height: 1
     trackHeightExtension: 0
     m_MarkerTimeStampsKeys: 42f0feffe2570000
-    m_MarkerTimeStampsValues: 558a766dc1e6db08c491cca416e8db08
+    m_MarkerTimeStampsValues: 558a766dc1e6db08785f3b7b45e8db08

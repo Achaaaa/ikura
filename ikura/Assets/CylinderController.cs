@@ -7,63 +7,65 @@ public class CylinderController : MonoBehaviour
 {
     public PlayableDirector playableDirector;
     public AnimationCurve animationCurve;
-
-    public int Figure_num = 5;
     public GameObject FigurePref;
-    private GameObject[] FigureObj;
+    public GameObject[] FigureObj;
     Vector3[] Figure_pos_origin;
     public Material[] FigureMaterial;
     public float CylinderRasius = 10;
-    public float RotatePerSecond = 1f;
     public float CountTime = 0; //(s)
     public bool isStopping = false;
     public bool hasStopped = false;
     public float timeStamp;
     bool isStopping_prev;
-    public GameObject StoppedFigure;
+    public GameObject StopFigure;
     public Vector3 RootOriginPos;
     float FigureRandomOffset;
+    public int StopFigureIndex;
+    public bool Win;
+    SlotManager SM;
+    public int MyIndex;
 
     void Start()
     {
         playableDirector = this.GetComponent<PlayableDirector>();
+        SM = this.transform.root.gameObject.GetComponent<SlotManager>();
         RootOriginPos = this.transform.position;
-        FigureRandomOffset = (2 * Mathf.PI / Figure_num ) * Random.Range(1, Figure_num);
+        FigureRandomOffset = (2 * Mathf.PI / SM.Figure_num ) * Random.Range(1, SM.Figure_num);
         InstantiateFigures();
     }
 
     // Update is called once per frame
     void Update()
     {
+        MyIndex = CheckCylinderIndex();
         if(isStopping_prev && !isStopping) {
             hasStopped = false;
         }
-        
         if(!isStopping_prev && isStopping) timeStamp = CountTime;
         if(isStopping) {
             playableDirector.Play();
-            //if((CountTime - timeStamp) < 3f) RotatePerSecond -= Time.deltaTime / 6f;
+            //if((CountTime - timeStamp) < 3f) SM.RotatePerSecond -= Time.deltaTime / 6f;
             Debug.Log("hi");
         }
         if(isStopping && JustAngle()) hasStopped = true;
         if(!hasStopped) RotateCylinder();
         //Debug.Log(JustAngle());
-        //Debug.Log(CountTime % (1f /Figure_num));
+        //Debug.Log(CountTime % (1f /SM.Figure_num));
         isStopping_prev = isStopping;
     }
 
     void InstantiateFigures(){
-        FigureObj  = new GameObject[Figure_num];
-        Figure_pos_origin = new Vector3[Figure_num];
-        for (int i = 0; i < Figure_num; i++)
+        FigureObj  = new GameObject[SM.Figure_num];
+        Figure_pos_origin = new Vector3[SM.Figure_num];
+        for (int i = 0; i < SM.Figure_num; i++)
         {
             Figure_pos_origin[i].x = RootOriginPos.x;
-            Figure_pos_origin[i].z = RootOriginPos.z + CylinderRasius * Mathf.Cos(2 * Mathf.PI / Figure_num * i + FigureRandomOffset);
-            Figure_pos_origin[i].y = RootOriginPos.y + CylinderRasius * Mathf.Sin(2 * Mathf.PI / Figure_num * i + FigureRandomOffset);
+            Figure_pos_origin[i].z = RootOriginPos.z + CylinderRasius * Mathf.Cos(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
+            Figure_pos_origin[i].y = RootOriginPos.y + CylinderRasius * Mathf.Sin(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
             Instantiate(FigurePref, Figure_pos_origin[i], Quaternion.identity, this.transform);
         }
         
-        for (int i = 0; i < Figure_num; i++)
+        for (int i = 0; i < SM.Figure_num; i++)
         {
             Transform childTransform = this.transform.GetChild(i);
             FigureObj[i] = childTransform.gameObject;
@@ -74,27 +76,40 @@ public class CylinderController : MonoBehaviour
     }
 
     bool JustAngle(){
-        for (int i = 0; i < Figure_num; i++)
+        for (int i = 0; i < SM.Figure_num; i++)
         {
-            if(-0.1f < FigureObj[i].transform.position.y && FigureObj[i].transform.position.y < 0.1f && 0f < FigureObj[i].transform.position.z) {
-                StoppedFigure = FigureObj[i];
-                return true;
+            if(-0.5f < FigureObj[i].transform.position.y && FigureObj[i].transform.position.y < 0.5f && 0f < FigureObj[i].transform.position.z) {
+                if(SM.Win){
+                    if(i == SM.StopFigureIndex)return true;
+                }else if(SM.CloseWin){                              //惜しい場合
+                    if(SM.OutCylinderIndex == CheckCylinderIndex()){    //外れるシリンダーの場合
+                        if(i != SM.StopFigureIndex && SM.CloseCylindersStatus == 2) return true;         //指定した画像じゃない時に止まる //他二つのシリンダーが止まっている時
+                    }else{                                              //２つまで揃うシリンダーの場合
+                        if(i == SM.StopFigureIndex)return true;         //指定した画像で止まる
+                    }
+                }else{                                              //完全にハズレの場合
+                    //if(i != SM.StopFigureIndex)return true;         
+                }
             }
         }
         return false;
     }
 
+    int CheckCylinderIndex(){
+        return int.Parse(this.gameObject.name.Replace("Cylinder_", ""));
+    }
+
     void RotateCylinder(){
         CountTime += Time.deltaTime; 
-        for (int i = 0; i < Figure_num; i++)
+        for (int i = 0; i < SM.Figure_num; i++)
         {
-            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, CylinderRasius * Mathf.Sin(2 * Mathf.PI * RotatePerSecond * CountTime + (2 * Mathf.PI / Figure_num * i) + FigureRandomOffset), CylinderRasius * Mathf.Cos(2 * Mathf.PI * RotatePerSecond * CountTime + (2 * Mathf.PI / Figure_num * i) + FigureRandomOffset));
+            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * i) + FigureRandomOffset), CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * i) + FigureRandomOffset));
         }
     }
 
     public void InteractCylinder(){
         if(isStopping) isStopping = false;
-        else Invoke("StopCylinder", Random.Range(0.5f, 2.0f));
+        else Invoke("StopCylinder", Random.Range(0.0f, 0.0f));
     }
 
     public void StopCylinder(){
