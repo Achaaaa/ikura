@@ -24,6 +24,7 @@ public class CylinderController : MonoBehaviour
     public bool Win;
     SlotManager SM;
     public int MyIndex;
+    public int[] ShuffledFigureIndex;
 
     void Start()
     {
@@ -57,16 +58,20 @@ public class CylinderController : MonoBehaviour
     void InstantiateFigures(){
         FigureObj  = new GameObject[SM.Figure_num];
         Figure_pos_origin = new Vector3[SM.Figure_num];
+        ShuffledFigureIndex = new int[SM.Figure_num];
         for (int i = 0; i < SM.Figure_num; i++)
         {
+            ShuffledFigureIndex[i] = i;
             Figure_pos_origin[i].x = RootOriginPos.x;
             Figure_pos_origin[i].z = RootOriginPos.z + CylinderRasius * Mathf.Cos(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
             Figure_pos_origin[i].y = RootOriginPos.y + CylinderRasius * Mathf.Sin(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
-            Instantiate(FigurePref, Figure_pos_origin[i], Quaternion.identity, this.transform);
         }
+
+        Shuffle(ShuffledFigureIndex);
         
         for (int i = 0; i < SM.Figure_num; i++)
         {
+            Instantiate(FigurePref, Figure_pos_origin[ShuffledFigureIndex[i]], Quaternion.identity, this.transform);
             Transform childTransform = this.transform.GetChild(i);
             FigureObj[i] = childTransform.gameObject;
             FigureObj[i].name = "figure_" + i.ToString();
@@ -103,7 +108,7 @@ public class CylinderController : MonoBehaviour
         CountTime += Time.deltaTime; 
         for (int i = 0; i < SM.Figure_num; i++)
         {
-            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * i) + FigureRandomOffset), CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * i) + FigureRandomOffset));
+            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
         }
     }
 
@@ -114,5 +119,20 @@ public class CylinderController : MonoBehaviour
 
     public void StopCylinder(){
         isStopping = true;
+    }
+
+    void Shuffle(int[] num) 
+    {
+        for (int i = 0; i < num.Length; i++)
+        {
+　　　　　　 //（説明１）現在の要素を預けておく
+            int temp = num[i]; 
+　　　　　　 //（説明２）入れ替える先をランダムに選ぶ
+            int randomIndex = Random.Range(0, num.Length); 
+　　　　　　 //（説明３）現在の要素に上書き
+            num[i] = num[randomIndex]; 
+　　　　　　 //（説明４）入れ替え元に預けておいた要素を与える
+            num[randomIndex] = temp; 
+        }
     }
 }
