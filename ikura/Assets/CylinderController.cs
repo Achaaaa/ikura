@@ -19,7 +19,6 @@ public class CylinderController : MonoBehaviour
     public GameObject StopFigure;
     public Vector3 RootOriginPos;
     float FigureRandomOffset;
-    public int StopFigureIndex;
     public bool Win;
     SlotManager SM;
     public int MyIndex;
@@ -44,13 +43,9 @@ public class CylinderController : MonoBehaviour
         if(!isStopping_prev && isStopping) timeStamp = CountTime;
         if(isStopping) {
             playableDirector.Play();
-            //if((CountTime - timeStamp) < 3f) SM.RotatePerSecond -= Time.deltaTime / 6f;
-            Debug.Log("hi");
         }
         if(isStopping && JustAngle()) hasStopped = true;
         if(!hasStopped) RotateCylinder();
-        //Debug.Log(JustAngle());
-        //Debug.Log(CountTime % (1f /SM.Figure_num));
         isStopping_prev = isStopping;
     }
 

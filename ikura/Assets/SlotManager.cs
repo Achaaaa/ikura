@@ -22,6 +22,7 @@ public class SlotManager : MonoBehaviour
     public int OutCylinderIndex;
     public int CloseCylindersStatus;
     public int[] OutFigureIndex; // 外れる時の画像３つを選ぶための配列
+    public bool AllCylindersHasStopped;
     
     // Start is called before the first frame update
     void Start()
@@ -46,11 +47,13 @@ public class SlotManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        WinPerform();
+        if(CheckAllCylindersHasStopped() == 3) AllCylindersHasStopped = true;
         CloseCylindersStatus = CloseCylindersHasStopped();
         if(InteractSlot && ! InteractSlot_prev){
             Win = false;
             CloseWin = false;
+            AllCylindersHasStopped = false;
             CheckWin = Random.Range(0, 5);
             OutCylinderIndex = Random.Range(0, 3); // 1個だけ外れるシリンダーのインデックス番号を決める
             StopFigureIndex = Random.Range(0, Figure_num); //止まる画像のインデックス番号を決める
@@ -70,6 +73,19 @@ public class SlotManager : MonoBehaviour
         InteractSlot_prev = InteractSlot;
     }
 
+    public void WinPerform(){
+        if(AllCylindersHasStopped && Win){
+            for (int i = 0; i < 3; i++)
+            {
+                CC[i].FigureObj[StopFigureIndex].GetComponent<FigureController>().Win = true;
+            }
+        }
+    }
+
+    public void EndPerform(){
+        Win = false;
+    }
+
     public void StopTimeline(){
         InteractSlot = false;
         playableDirector.Stop();
@@ -80,6 +96,17 @@ public class SlotManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             if(i != OutCylinderIndex && CC[i].hasStopped){
+                SumBools++;
+            }
+        }
+        return SumBools;
+    }
+
+    public int CheckAllCylindersHasStopped(){  //3つのシリンダーが止まっているか
+        int SumBools = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if(CC[i].hasStopped){
                 SumBools++;
             }
         }
