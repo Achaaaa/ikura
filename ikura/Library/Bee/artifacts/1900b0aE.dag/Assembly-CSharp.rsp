@@ -347,6 +347,7 @@
 "Assets/CylinderController.cs"
 "Assets/FigureController.cs"
 "Assets/SlotManager.cs"
+"Assets/WindowSizeCalculator.cs"
 -langversion:9.0
 
 /deterministic

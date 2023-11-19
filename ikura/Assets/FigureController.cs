@@ -25,7 +25,6 @@ public class FigureController : MonoBehaviour
     }
 
     public void EndPerform(){
-        SM.Win = false;
         IsWinPerforming = false;
         playableDirector.Stop();
     }

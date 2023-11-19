@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79cb9ecc0d4a6d428ab98a681a33897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeAreaShownRange: {x: -0.0610511, y: 9.957435}
+  timeAreaShownRange: {x: -0.061240017, y: 9.957627}
   trackScale: 1
   playRangeEnabled: 0
   timeAreaPlayRange: {x: 3.4028235e+38, y: 3.4028235e+38}
-  windowTime: 1.4333333333333333
+  windowTime: 0
   verticalScroll: 0
   sequencerHeaderWidth: 315
   m_Keys:
@@ -59,8 +59,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 2a6cffffe657000098edffff
-    m_MarkerTimeStampsValues: 558a766dc1e6db0840473b7b45e8db082469e19916e8db08
+    m_MarkerTimeStampsKeys: 2a6cffffe657000098edffff0a580000
+    m_MarkerTimeStampsValues: 558a766dc1e6db0840473b7b45e8db082469e19916e8db088a860a2fd4e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 6060ffffe4570000d4ebffff
-    m_MarkerTimeStampsValues: 558a766dc1e6db084250ac7416e8db081a543b7b45e8db08
+    m_MarkerTimeStampsKeys: 6060ffffe4570000d4ebffff08580000
+    m_MarkerTimeStampsValues: 558a766dc1e6db084250ac7416e8db081a543b7b45e8db08f213504fd4e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 745effff282affffe85700009eebffff
-    m_MarkerTimeStampsValues: 558a766dc1e6db08ab2cad1fbde6db08dc41dc7d15e8db08d8543b7b45e8db08
+    m_MarkerTimeStampsKeys: 745effff282affffe85700009eebffff10580000
+    m_MarkerTimeStampsValues: 558a766dc1e6db08ab2cad1fbde6db08dc41dc7d15e8db08d8543b7b45e8db0866d47f51d4e8db08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -167,5 +167,5 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 42f0feffe2570000fe570000
-    m_MarkerTimeStampsValues: 558a766dc1e6db08785f3b7b45e8db08ffeeb42fcce8db08
+    m_MarkerTimeStampsKeys: 42f0feffe2570000fe57000004580000
+    m_MarkerTimeStampsValues: 558a766dc1e6db08785f3b7b45e8db08ffeeb42fcce8db0829731153d4e8db08

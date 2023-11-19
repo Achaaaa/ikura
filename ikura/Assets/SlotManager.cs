@@ -88,16 +88,13 @@ public class SlotManager : MonoBehaviour
     public void CreditSystem(){
         if(AllCylindersHasStopped && 0 < Credit && !CC[0].FigureObj[StopFigureIndex].GetComponent<FigureController>().IsWinPerforming){
             count += Time.deltaTime;
-            if(1.0f < count){
+            if((Win ? 3.0f : 0.5f) < count){
                 Credit--;
                 InteractSlot = true;
                 count = 0f;
+                Win = false;
             }
         }
-    }
-
-    public void EndPerform(){
-        Win = false;
     }
 
     public void StopTimeline(){
