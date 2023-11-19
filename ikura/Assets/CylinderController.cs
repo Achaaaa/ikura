@@ -28,7 +28,7 @@ public class CylinderController : MonoBehaviour
     {
         playableDirector = this.GetComponent<PlayableDirector>();
         SM = this.transform.root.gameObject.GetComponent<SlotManager>();
-        RootOriginPos = this.transform.position;
+        RootOriginPos = this.transform.localPosition;
         FigureRandomOffset = (2 * Mathf.PI / SM.Figure_num ) * Random.Range(1, SM.Figure_num);
         InstantiateFigures();
     }
@@ -77,7 +77,7 @@ public class CylinderController : MonoBehaviour
     bool JustAngle(){
         for (int i = 0; i < SM.Figure_num; i++)
         {
-            if(-0.5f < FigureObj[i].transform.position.y && FigureObj[i].transform.position.y < 0.5f && 0f < FigureObj[i].transform.position.z) {
+            if(-0.5f < FigureObj[i].transform.localPosition.y && FigureObj[i].transform.localPosition.y < 0.5f && 0f < FigureObj[i].transform.localPosition.z) {
                 if(SM.Win){
                     if(i == SM.StopFigureIndex)return true;
                 }else if(SM.CloseWin){                              //惜しい場合
@@ -102,7 +102,7 @@ public class CylinderController : MonoBehaviour
         CountTime += Time.deltaTime; 
         for (int i = 0; i < SM.Figure_num; i++)
         {
-            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, SM.CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), SM.CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
+            FigureObj[i].transform.localPosition = new Vector3(RootOriginPos.x, SM.CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), SM.CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
         }
     }
 
