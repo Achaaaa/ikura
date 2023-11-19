@@ -23,6 +23,7 @@ public class SlotManager : MonoBehaviour
     public int CloseCylindersStatus;
     public int[] OutFigureIndex; // 外れる時の画像３つを選ぶための配列
     public bool AllCylindersHasStopped;
+    bool AllCylindersHasStopped_prev;
     
     // Start is called before the first frame update
     void Start()
@@ -71,13 +72,14 @@ public class SlotManager : MonoBehaviour
         //     Win = true;
         // }
         InteractSlot_prev = InteractSlot;
+        AllCylindersHasStopped_prev = AllCylindersHasStopped;
     }
 
     public void WinPerform(){
-        if(AllCylindersHasStopped && Win){
+        if(!AllCylindersHasStopped_prev && AllCylindersHasStopped && Win){
             for (int i = 0; i < 3; i++)
             {
-                CC[i].FigureObj[StopFigureIndex].GetComponent<FigureController>().Win = true;
+                CC[i].FigureObj[StopFigureIndex].GetComponent<FigureController>().IsWinPerforming = true;
             }
         }
     }

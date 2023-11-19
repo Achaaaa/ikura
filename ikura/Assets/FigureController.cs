@@ -7,7 +7,7 @@ public class FigureController : MonoBehaviour
 {
     public Animator anim;
     private PlayableDirector playableDirector;
-    public bool Win;
+    public bool IsWinPerforming;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +17,13 @@ public class FigureController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Win) {
+        if(IsWinPerforming) {
             playableDirector.Play();
         }
     }
 
     public void EndPerform(){
-        Win = false;
+        IsWinPerforming = false;
         playableDirector.Stop();
     }
 }
