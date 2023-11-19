@@ -7,6 +7,8 @@ public class SlotManager : MonoBehaviour
 {
     public int Figure_num = 5;
     public float RotatePerSecond = 1f;
+    public float CylinderRasius = 13;
+
     public bool InteractSlot;
     public PlayableDirector playableDirector;
     public bool Win;
@@ -19,6 +21,7 @@ public class SlotManager : MonoBehaviour
     public int StopFigureIndex; 
     public int OutCylinderIndex;
     public int CloseCylindersStatus;
+    public int[] OutFigureIndex; // 外れる時の画像３つを選ぶための配列
     
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,11 @@ public class SlotManager : MonoBehaviour
         CylinderObj = new GameObject[3];
         StoppedFigure = new GameObject[3];
         CC = new CylinderController[3];
+        OutFigureIndex = new int[Figure_num];
+        for (int i = 0; i < Figure_num; i++)
+        {
+            OutFigureIndex[i] = i;
+        }
         for (int i = 0; i < 3; i++)
         {
             Transform childTransform = this.transform.GetChild(i);
@@ -40,13 +48,13 @@ public class SlotManager : MonoBehaviour
     {
 
         CloseCylindersStatus = CloseCylindersHasStopped();
-
         if(InteractSlot && ! InteractSlot_prev){
             Win = false;
             CloseWin = false;
-            CheckWin = Random.Range(0, 2);
+            CheckWin = Random.Range(0, 5);
             OutCylinderIndex = Random.Range(0, 3); // 1個だけ外れるシリンダーのインデックス番号を決める
             StopFigureIndex = Random.Range(0, Figure_num); //止まる画像のインデックス番号を決める
+            Shuffle(OutFigureIndex);
         }
         if(CheckWin == 0)Win = true;
         if(0 < CheckWin && CheckWin < 2){
@@ -76,5 +84,20 @@ public class SlotManager : MonoBehaviour
             }
         }
         return SumBools;
+    }
+
+    void Shuffle(int[] num) 
+    {
+        for (int i = 0; i < num.Length; i++)
+        {
+　　　　　　 //（説明１）現在の要素を預けておく
+            int temp = num[i]; 
+　　　　　　 //（説明２）入れ替える先をランダムに選ぶ
+            int randomIndex = Random.Range(0, num.Length); 
+　　　　　　 //（説明３）現在の要素に上書き
+            num[i] = num[randomIndex]; 
+　　　　　　 //（説明４）入れ替え元に預けておいた要素を与える
+            num[randomIndex] = temp; 
+        }
     }
 }

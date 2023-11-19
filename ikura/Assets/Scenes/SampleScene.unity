@@ -255,7 +255,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fdfeaa0317c8f0145afad2b4a7bd6d3a, type: 2}
   - {fileID: 2100000, guid: a7075e9cf53bd3a43a865d3e1e1a991b, type: 2}
   - {fileID: 2100000, guid: 352242f12f7d7944daec571543d1b9c5, type: 2}
-  CylinderRasius: 10
   CountTime: 0
   isStopping: 1
   hasStopped: 1
@@ -265,6 +264,7 @@ MonoBehaviour:
   StopFigureIndex: 0
   Win: 0
   MyIndex: 0
+  ShuffledFigureIndex: 
 --- !u!23 &35331298
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -490,7 +490,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fdfeaa0317c8f0145afad2b4a7bd6d3a, type: 2}
   - {fileID: 2100000, guid: a7075e9cf53bd3a43a865d3e1e1a991b, type: 2}
   - {fileID: 2100000, guid: 352242f12f7d7944daec571543d1b9c5, type: 2}
-  CylinderRasius: 10
   CountTime: 0
   isStopping: 1
   hasStopped: 1
@@ -500,6 +499,7 @@ MonoBehaviour:
   StopFigureIndex: 0
   Win: 0
   MyIndex: 0
+  ShuffledFigureIndex: 
 --- !u!23 &882060068
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -813,7 +813,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: fdfeaa0317c8f0145afad2b4a7bd6d3a, type: 2}
   - {fileID: 2100000, guid: a7075e9cf53bd3a43a865d3e1e1a991b, type: 2}
   - {fileID: 2100000, guid: 352242f12f7d7944daec571543d1b9c5, type: 2}
-  CylinderRasius: 10
   CountTime: 0
   isStopping: 1
   hasStopped: 1
@@ -823,6 +822,7 @@ MonoBehaviour:
   StopFigureIndex: 0
   Win: 0
   MyIndex: 0
+  ShuffledFigureIndex: 
 --- !u!23 &1525705199
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -921,6 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Figure_num: 5
   RotatePerSecond: -1
+  CylinderRasius: 7
   InteractSlot: 0
   playableDirector: {fileID: 2030084295}
   Win: 0
@@ -930,6 +931,7 @@ MonoBehaviour:
   StopFigureIndex: 0
   OutCylinderIndex: 0
   CloseCylindersStatus: 0
+  OutFigureIndex: 
 --- !u!4 &2030084294
 Transform:
   m_ObjectHideFlags: 0

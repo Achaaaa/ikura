@@ -11,7 +11,6 @@ public class CylinderController : MonoBehaviour
     public GameObject[] FigureObj;
     Vector3[] Figure_pos_origin;
     public Material[] FigureMaterial;
-    public float CylinderRasius = 10;
     public float CountTime = 0; //(s)
     public bool isStopping = false;
     public bool hasStopped = false;
@@ -63,8 +62,8 @@ public class CylinderController : MonoBehaviour
         {
             ShuffledFigureIndex[i] = i;
             Figure_pos_origin[i].x = RootOriginPos.x;
-            Figure_pos_origin[i].z = RootOriginPos.z + CylinderRasius * Mathf.Cos(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
-            Figure_pos_origin[i].y = RootOriginPos.y + CylinderRasius * Mathf.Sin(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
+            Figure_pos_origin[i].z = RootOriginPos.z + SM.CylinderRasius * Mathf.Cos(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
+            Figure_pos_origin[i].y = RootOriginPos.y + SM.CylinderRasius * Mathf.Sin(2 * Mathf.PI / SM.Figure_num * i + FigureRandomOffset);
         }
 
         Shuffle(ShuffledFigureIndex);
@@ -93,7 +92,7 @@ public class CylinderController : MonoBehaviour
                         if(i == SM.StopFigureIndex)return true;         //指定した画像で止まる
                     }
                 }else{                                              //完全にハズレの場合
-                    //if(i != SM.StopFigureIndex)return true;         
+                    if(i == SM.OutFigureIndex[MyIndex])return true;         
                 }
             }
         }
@@ -108,7 +107,7 @@ public class CylinderController : MonoBehaviour
         CountTime += Time.deltaTime; 
         for (int i = 0; i < SM.Figure_num; i++)
         {
-            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
+            FigureObj[i].transform.position = new Vector3(RootOriginPos.x, SM.CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), SM.CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
         }
     }
 
