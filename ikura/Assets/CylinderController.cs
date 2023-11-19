@@ -81,7 +81,7 @@ public class CylinderController : MonoBehaviour
                 if(SM.Win){
                     if(i == SM.StopFigureIndex)return true;
                 }else if(SM.CloseWin){                              //惜しい場合
-                    if(SM.OutCylinderIndex == CheckCylinderIndex()){    //外れるシリンダーの場合
+                    if(SM.OutCylinderIndex == MyIndex){    //外れるシリンダーの場合
                         if(i != SM.StopFigureIndex && SM.CloseCylindersStatus == 2) return true;         //指定した画像じゃない時に止まる //他二つのシリンダーが止まっている時
                     }else{                                              //２つまで揃うシリンダーの場合
                         if(i == SM.StopFigureIndex)return true;         //指定した画像で止まる

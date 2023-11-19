@@ -8,10 +8,12 @@ public class FigureController : MonoBehaviour
     public Animator anim;
     private PlayableDirector playableDirector;
     public bool IsWinPerforming;
+    SlotManager SM;
     // Start is called before the first frame update
     void Start()
     {
         playableDirector = GetComponent<PlayableDirector>();
+        SM = this.transform.root.gameObject.GetComponent<SlotManager>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class FigureController : MonoBehaviour
     }
 
     public void EndPerform(){
+        SM.Win = false;
         IsWinPerforming = false;
         playableDirector.Stop();
     }

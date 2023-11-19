@@ -48,7 +48,6 @@ public class SlotManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        WinPerform();
         if(CheckAllCylindersHasStopped() == 3) AllCylindersHasStopped = true;
         CloseCylindersStatus = CloseCylindersHasStopped();
         if(InteractSlot && ! InteractSlot_prev){
@@ -60,7 +59,7 @@ public class SlotManager : MonoBehaviour
             StopFigureIndex = Random.Range(0, Figure_num); //止まる画像のインデックス番号を決める
             Shuffle(OutFigureIndex);
         }
-        if(CheckWin == 0)Win = true;
+        if(!AllCylindersHasStopped && CheckWin == 0)Win = true;
         if(0 < CheckWin && CheckWin < 2){
             CloseWin = true;
         }
@@ -68,9 +67,7 @@ public class SlotManager : MonoBehaviour
             playableDirector.Play();
         }
         else StopTimeline();
-        // if(StoppedFigure[0].name == StoppedFigure[1].name && StoppedFigure[1].name == StoppedFigure[2].name){
-        //     Win = true;
-        // }
+        WinPerform();
         InteractSlot_prev = InteractSlot;
         AllCylindersHasStopped_prev = AllCylindersHasStopped;
     }
