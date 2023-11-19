@@ -98,13 +98,26 @@ public class CylinderController : MonoBehaviour
         return int.Parse(this.gameObject.name.Replace("Cylinder_", ""));
     }
 
+    float[] Angle;
     void RotateCylinder(){
         CountTime += Time.deltaTime; 
+        Angle = new float[SM.Figure_num];
         for (int i = 0; i < SM.Figure_num; i++)
         {
             FigureObj[i].transform.localPosition = new Vector3(RootOriginPos.x, SM.CylinderRasius * Mathf.Sin(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset), SM.CylinderRasius * Mathf.Cos(2 * Mathf.PI * SM.RotatePerSecond * CountTime + (2 * Mathf.PI / SM.Figure_num * ShuffledFigureIndex[i]) + FigureRandomOffset));
+            Angle[i] = GetAngle(new Vector2(this.transform.localPosition.y,this.transform.localPosition.z), new Vector2(FigureObj[i].transform.localPosition.y, FigureObj[i].transform.localPosition.z));
+            FigureObj[i].transform.rotation = Quaternion.AngleAxis(Angle[i], new Vector3(1f,0f,0f)) * this.transform.rotation; 
         }
     }
+
+    float GetAngle(Vector2 start,Vector2 target)
+	{
+		Vector2 dt = target - start;
+		float rad = Mathf.Atan2 (dt.y, dt.x);
+		float degree = rad * Mathf.Rad2Deg;
+		
+		return degree;
+	}
 
     public void InteractCylinder(){
         if(isStopping) isStopping = false;
