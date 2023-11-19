@@ -5,6 +5,8 @@ using UnityEngine.Playables;
 
 public class SlotManager : MonoBehaviour
 {
+    public int Credit;
+
     public int Figure_num = 5;
     public float RotatePerSecond = 1f;
     public float CylinderRasius = 13;
@@ -48,6 +50,7 @@ public class SlotManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CreditSystem();
         if(CheckAllCylindersHasStopped() == 3) AllCylindersHasStopped = true;
         CloseCylindersStatus = CloseCylindersHasStopped();
         if(InteractSlot && ! InteractSlot_prev){
@@ -77,6 +80,18 @@ public class SlotManager : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 CC[i].FigureObj[StopFigureIndex].GetComponent<FigureController>().IsWinPerforming = true;
+            }
+        }
+    }
+
+    float count = 0f;
+    public void CreditSystem(){
+        if(AllCylindersHasStopped && 0 < Credit && !CC[0].FigureObj[StopFigureIndex].GetComponent<FigureController>().IsWinPerforming){
+            count += Time.deltaTime;
+            if(1.0f < count){
+                Credit--;
+                InteractSlot = true;
+                count = 0f;
             }
         }
     }

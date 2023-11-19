@@ -376,6 +376,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4105448565734442077, guid: 61fa6c213257fc040b3bedd1b870ec52, type: 3}
+      propertyPath: Credit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960226303898161088, guid: 61fa6c213257fc040b3bedd1b870ec52, type: 3}
+      propertyPath: Credit
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960226303898161088, guid: 61fa6c213257fc040b3bedd1b870ec52, type: 3}
+      propertyPath: InteractSlot
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7960226303898161089, guid: 61fa6c213257fc040b3bedd1b870ec52, type: 3}
       propertyPath: m_Name
       value: SlotManager

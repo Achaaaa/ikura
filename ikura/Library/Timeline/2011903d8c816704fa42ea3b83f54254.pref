@@ -16,7 +16,7 @@ MonoBehaviour:
   trackScale: 1
   playRangeEnabled: 0
   timeAreaPlayRange: {x: 3.4028235e+38, y: 3.4028235e+38}
-  windowTime: 0.38333333333333336
+  windowTime: 1.4333333333333333
   verticalScroll: 0
   sequencerHeaderWidth: 315
   m_Keys:
@@ -167,5 +167,5 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 42f0feffe2570000
-    m_MarkerTimeStampsValues: 558a766dc1e6db08785f3b7b45e8db08
+    m_MarkerTimeStampsKeys: 42f0feffe2570000fe570000
+    m_MarkerTimeStampsValues: 558a766dc1e6db08785f3b7b45e8db08ffeeb42fcce8db08
